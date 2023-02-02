@@ -15,7 +15,6 @@ class DashboardController extends Controller
         $user = User::all()->count();
         $positions = Position::all()->count();
         $Holiday = Holiday::all()->count();
-        // dd($user);
         return inertia('Admin/Dashboard/Dashboard', [
             'user' => $user,
             'positions' => $positions,

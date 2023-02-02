@@ -25,13 +25,7 @@ class ProfileController extends Controller
             'status' => session('status'),
         ]);
     }
-    // public function user(Request $request)
-    // {
-    //     return Inertia::render('Profile/User', [
-    //         'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-    //         'status' => session('status'),
-    //     ]);
-    // }
+
 
     /**
      * Update the user's profile information.
@@ -51,34 +45,6 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit');
     }
-    // public function update1(ProfileUpdateRequest $request)
-    // {
-    //     $request->user()->fill($request->validated());
-
-    //     if ($request->user()->isDirty('email')) {
-    //         $request->user()->email_verified_at = null;
-    //     }
-
-    //     $request->user()->save();
-
-    //     return Redirect::route('profile.edit');
-    // }
-
-    // public function update(ProfileUpdateRequest $request)
-    // {
-    //     $request->user()->fill($request->validated());
-    //     if (Auth::attempt($request->only('email', 'password'))) {
-    //         $request->session()->regenerate();
-    //         if (Auth::user()->role_id == 1) {
-    //             return Redirect::route('profile.edit');
-    //         }
-    //         if (Auth::user()->role_id == 3) {
-    //             return Redirect::route('profile.user');
-    //         }
-    //     }
-    //     mau buat aut dan logis untuk user edit dan updat dan delete
-    // }
-
 
 
     /**

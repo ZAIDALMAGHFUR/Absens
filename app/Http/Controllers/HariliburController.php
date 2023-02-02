@@ -23,14 +23,21 @@ class HariliburController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'holiday_date' => 'required',
+        ]);
+
         $holiday = new Holiday();
         $holiday->title = $request->title;
         $holiday->description = $request->description;
         $holiday->holiday_date = $request->holiday_date;
         $holiday->save();
+
         return redirect()->back();
     }
+
 
     public function edit(Holiday $holiday, $id)
     {

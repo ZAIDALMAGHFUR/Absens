@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Position;
-use App\Exports\UsersExport;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Excel;
 use App\Http\Resources\UserCollection;
 
 class KariawanController extends Controller

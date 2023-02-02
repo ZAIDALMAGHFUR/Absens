@@ -22,7 +22,6 @@ class AbsensiController extends Controller
     public function AddAbsensi()
     {
         $position = Position::where('id', '!=', '1')->get();
-        // $position = Position::all();
         return inertia('Admin/Absensi/AddAbsensi', [
             'Position' => $position,
         ]);
@@ -38,9 +37,7 @@ class AbsensiController extends Controller
         $Attendance->batas_start_time = $request->batas_start_time;
         $Attendance->end_time = $request->end_time;
         $Attendance->batas_end_time = $request->batas_end_time;
-        // $Attendance->position_id = $request->position_id;
         $Attendance->save();
-        // dd($Attendance);
         $array = [];
         foreach ((array)$request->position_id as $key => $value) {
             $array[] = [
@@ -82,7 +79,6 @@ class AbsensiController extends Controller
         $Attendance->batas_start_time = $request->batas_start_time;
         $Attendance->end_time = $request->end_time;
         $Attendance->batas_end_time = $request->batas_end_time;
-        // $Attendance->position_id = $request->position_id;
         $Attendance->save();
         $array = [];
         foreach ((array)$request->position_id as $key => $value) {
