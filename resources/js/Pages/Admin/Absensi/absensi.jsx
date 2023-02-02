@@ -11,7 +11,7 @@ export default function HariLibur(props) {
         <>
             <Head title="Absensi" />
             <AdminLayout>
-                <div className='mt-20 xl:ml-[15rem]'>
+                <div className='mt-20 sm:ml-[17rem] xl:ml-[15rem]'>
                     <div className='m-10  text- font-bold flex justify-between xl:text-4xl xl:m-[5rem]'>
                         <h1>Tambahkan Absensi</h1>
                         <a href="/AddAbsensi"><button type="button" className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Tambahakan Absensi</button></a>
@@ -34,7 +34,7 @@ export default function HariLibur(props) {
                                             <th scope="col" className="px-6 py-3 border">DELETE</th>
                                         </tr>
                                     </thead>
-                                    {props.Attendance ? props.Attendance.map((data, i) => {
+                                    {props.Attendance != 0 ? props.Attendance.map((data, i) => {
                                         return (
                                             <tbody key={i}>
                                                 <tr className="bg-white dark:bg-gray-800 whitespace-nowrap" key={i}>
@@ -62,7 +62,7 @@ export default function HariLibur(props) {
                                                 </tr>
                                             </tbody>
                                         )
-                                    }) : ""}
+                                    }) : <td className='w-full text-center font-extrabold text-xl' colSpan={9}>Belum Ada Data Absensi Hari Ini</td>}
                                 </table>
                             </div>
                         </div>

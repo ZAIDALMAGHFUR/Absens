@@ -26,7 +26,7 @@ export default function addJabatan(props) {
     return (
         <AdminLayout>
             <Head title="Jabatan" />
-            <div className='mt-20 xl:ml-[15rem]'>
+            <div className='mt-20 sm:ml-[15rem] xl:ml-[15rem]'>
                 <div className='m-10  text- font-bold flex justify-between xl:text-4xl xl:m-[5rem]'>
                     <h1>Tambahakan Posisi Jabatan</h1>
                 </div>

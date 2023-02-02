@@ -5,7 +5,7 @@ import { Head } from "@inertiajs/inertia-react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler } from "chart.js";
 // import { Doughnut } from "react-chartjs-2";
 import { PolarArea } from "react-chartjs-2";
-import { Radar } from 'react-chartjs-2';
+// import { Radar } from 'react-chartjs-2';
 
 // import Chart from 'chart.js/auto';
 
@@ -51,24 +51,24 @@ export default function Dashboard(props) {
         ],
     };
 
-    const data3 = {
-        labels: ["User", "Jabatan", "Hari Libur"],
-        datasets: [
-            {
-                data: [props.user, props.positions, props.Holiday],
-                backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(54, 162, 235, 0.5)", "rgba(255, 206, 86, 0.5)"],
-                borderColor: ["rgba(255, 99, 132, 0.5)", "rgba(54, 162, 235, 0.5)", "rgba(255, 206, 86, 0.5)"],
-                borderWidth: 1,
-            },
-        ],
-    };
+    // const data3 = {
+    //     labels: ["User", "Jabatan", "Hari Libur"],
+    //     datasets: [
+    //         {
+    //             data: [props.user, props.positions, props.Holiday],
+    //             backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(54, 162, 235, 0.5)", "rgba(255, 206, 86, 0.5)"],
+    //             borderColor: ["rgba(255, 99, 132, 0.5)", "rgba(54, 162, 235, 0.5)", "rgba(255, 206, 86, 0.5)"],
+    //             borderWidth: 1,
+    //         },
+    //     ],
+    // };
 
     return (
         <>
             <Head title="Dashboard Admin" />
             <AdminLayout auth={props.auth} errors={props.errors} header={<h2 className="font-semibold text-xl text-gray-800 ">Dashboard</h2>}>
-                <div className="mt-20 lg:m-[10rem] xl:ml-[15rem]">
-                    <div className="p-10 xl:flex">
+                <div className="mt-20 sm:ml-[10rem] lg:m-[10rem] xl:ml-[15rem]">
+                    <div className="p-10 sm:ml-[5rem] sm:-mr-[5rem] xl:flex">
                         <div className="w-full max-w-full px-3 mb-6 sm:w-1/2 sm:flex-none xl:mb-0 xl:w-1/4">
                             <div className="relative flex flex-col min-w-0 break-words bg-white shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
                                 <div className="flex-auto p-4">
@@ -170,11 +170,11 @@ export default function Dashboard(props) {
                             {newFunction()}
                         </div>
                     </div>
-                    <div class="flex justify-center mx-auto shadow-xl w-full max-w-sm bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700">
+                    {/* <div class="flex justify-center mx-auto shadow-xl w-full max-w-sm bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700">
                         <div className="flex justify-center items-center">
                             <Radar data={data3} />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </AdminLayout>
         </>

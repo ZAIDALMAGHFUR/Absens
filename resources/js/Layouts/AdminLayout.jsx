@@ -32,7 +32,7 @@ function AdminLayout({ children, auth }) {
                         <div className="flex items-center">
                             <div className="flex items-center ml-3">
                                 <div className='flex justify-center items-center'>
-                                    <h1 className='mr-5'>{auth?.user.name}</h1>
+                                    <h1 className=''>{auth?.user.name}</h1>
                                     <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                         <span className="sr-only">Open user menu</span>
                                         <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo" />
@@ -138,20 +138,22 @@ function AdminLayout({ children, auth }) {
                                 </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
-                                <span className='ml-3'>
-                                    <Dropdown.Link
-                                        href={route("logout")}
-                                        method="post"
-                                        as="button"
-                                    >
-                                        Log Out
-                                    </Dropdown.Link>
-                                </span>
-                            </a>
-                        </li>
+                        <div className='pt-[13rem]'>
+                            <li>
+                                <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
+                                    <span className='ml-3'>
+                                        <Dropdown.Link
+                                            href={route("logout")}
+                                            method="post"
+                                            as="button"
+                                        >
+                                            Log Out
+                                        </Dropdown.Link>
+                                    </span>
+                                </a>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </aside>
@@ -252,20 +254,22 @@ function AdminLayout({ children, auth }) {
                                         </span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
-                                        <span className='ml-3'>
-                                            <Dropdown.Link
-                                                href={route("logout")}
-                                                method="post"
-                                                as="button"
-                                            >
-                                                Log Out
-                                            </Dropdown.Link>
-                                        </span>
-                                    </a>
-                                </li>
+                                <div className='pt-[13rem]'>
+                                    <li>
+                                        <a href="#" className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
+                                            <span className='ml-3'>
+                                                <Dropdown.Link
+                                                    href={route("logout")}
+                                                    method="post"
+                                                    as="button"
+                                                >
+                                                    Log Out
+                                                </Dropdown.Link>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </div>
                             </ul>
                         </div>
                     </aside>

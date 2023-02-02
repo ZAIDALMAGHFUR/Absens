@@ -1,23 +1,35 @@
 import React from "react";
+import printJS from 'print-js'
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head, Link } from "@inertiajs/inertia-react";
 import AttendanceBadges from "@/Pages/Home/Partials/AttendanceBadges";
 
 export default function Izin(props) {
   // console.log(props);
+
+  function printForm() {
+    printJS({
+      printable: 'form1',
+      type: 'html',
+      targetStyles: ['*'],
+      style: '@page { size: Letter landscape; }',
+    })
+  }
+
   const { attendance, permissions } = props;
   return (
     <AdminLayout auth={props.auth} errors={props.errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Izin</h2>}>
       <Head title={props.title} />
 
-      <div className="mt-32 xl:ml-[15rem]">
+      <div className="mt-32 sm:ml-[16rem] xl:ml-[15rem]">
         <div className="xl:m-[5rem]">
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-5">
             <div className="card mb-3 p-5 bg-white">
-              <div className="card-body">
+              <div id="form1" className="card-body">
                 <div className="mb-3 mb-md-0">
                   <h5 className="card-title">{attendance.title}</h5>
                   <h6 className="card-subtitle mb-2 text-gray-800">{attendance.description}</h6>
+                  <button onClick={() => printForm()} className='text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2' >Print daftar belum absen</button>
                   <div className="flex align-items-center gap-2">
                     <AttendanceBadges attendance={attendance} />
                     <span href="" className="badge badge-warning">

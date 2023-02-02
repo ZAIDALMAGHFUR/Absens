@@ -31,7 +31,6 @@ use App\Http\Controllers\HariliburController;
 
 Route::middleware(['auth', 'OnlyAdmin', ])->group(function () {
     //dashboard route
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //jabatan route

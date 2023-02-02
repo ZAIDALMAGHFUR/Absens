@@ -20,7 +20,7 @@ export default function Kariawan(props) {
         <>
             <Head title="karyawan" />
             <AdminLayout>
-                <div className='mt-20 xl:ml-[15rem]'>
+                <div className='mt-20 sm:ml-[17rem] xl:ml-[15rem]'>
 
 
                     <div className='m-10  text- font-bold flex justify-between xl:text-4xl xl:m-[5rem]'>
@@ -63,7 +63,7 @@ export default function Kariawan(props) {
                                             <th scope="col" className="px-6 py-3 border">Delete</th>
                                         </tr>
                                     </thead>
-                                    {props.user.data ? props.user.data.map((data, i) => {
+                                    {props.user.data != 0 ? props.user.data.map((data, i) => {
                                         return (
                                             <tbody key={i}>
                                                 <tr className="bg-white dark:bg-gray-800" key={i}>
@@ -110,7 +110,7 @@ export default function Kariawan(props) {
                                                 </tr>
                                             </tbody>
                                         )
-                                    }) : ""}
+                                    }) : <td className='w-full text-center font-extrabold text-xl' colSpan={8}>Data Karyawan Tidak Di Temukan</td>}
                                 </table>
                             </div >
                             <div className='flex justify-end items-center m-4'>

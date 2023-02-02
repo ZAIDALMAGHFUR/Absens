@@ -9,7 +9,7 @@ export default function Index(props) {
         <>
             <Head title={props.title} />
             <AdminLayout>
-                <div className="mt-20 xl:ml-[15rem]">
+                <div className="mt-20 sm:ml-[17rem] xl:ml-[15rem]">
                     <div>
                         <div className="xl:m-[5rem]">
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -18,7 +18,7 @@ export default function Index(props) {
                                         <h3 className="text-3xl font-bold mb-4 text-black">
                                             Daftar Absensi Dengan Kehadiran
                                         </h3>
-                                        {props.attendances &&
+                                        {props.attendances != 0 &&
                                             Object.keys(props.attendances).map(
                                                 (key, i) => {
                                                     let attendance =
@@ -51,7 +51,7 @@ export default function Index(props) {
                                                         </Link>
                                                     );
                                                 }
-                                            )}
+                                            ) || (<td className='w-full text-center font-extrabold text-xl' colSpan={6}>Belum Ada Data Kehadiran Hari Ini</td>)}
                                     </div>
                                 </div>
                             </div>

@@ -68,7 +68,7 @@ export default function addAbsensi(props) {
     return (
         <AdminLayout>
             <Head title="Jabatan" />
-            <div className="mt-20 xl:ml-[15rem]">
+            <div className="mt-[5.7rem] sm:ml-[16rem] xl:ml-[15rem]">
 
                 <div className="m-10  text- font-bold flex justify-between xl:text-4xl xl:m-[5rem]">
                     <h1>Tambahkan Absensi</h1>
@@ -179,7 +179,7 @@ export default function addAbsensi(props) {
                                     type="name"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
-                                    batas end ime
+                                    batas end time
                                 </label>
                                 <input
                                     type="time"
