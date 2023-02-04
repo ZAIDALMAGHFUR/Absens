@@ -52,22 +52,7 @@ export default function Izin(props) {
                         </button>
                       </div>
                     </div>
-                    {/* <div className="input-group mb-3">
-                                            <input
-                                                type="date"
-                                                className="form-control"
-                                                id="filterDate"
-                                                name="display-by-date"
-                                                value="{{ request('display-by-date') }}"
-                                            />
-                                            <button
-                                                className="btn btn-primary"
-                                                type="submit"
-                                                id="button-addon1"
-                                            >
-                                                Tampilkan
-                                            </button>
-                                        </div> */}
+
                   </div>
                 </form>
                 {props.permissions.length === 0 && (
@@ -77,12 +62,7 @@ export default function Izin(props) {
                 )}
                 <div>
                   <div className="p-5 border border-gray-50 rounded mb-5">
-                    {/* <div className="p-3 rounded bg-white border my-3 flex items-center justify-between"> */}
-                    {/* <div>Hari : <span className="font-bold">
-                {{ \Carbon\Carbon::parse($data['not_presence_date'])->dayName }}
-                {{ \Carbon\Carbon::parse($data['not_presence_date'])->isCurrentDay() ? '(Hari ini)' : '' }}
-            </span> */}
-                    {/* </div> */}
+
                     <div>
                       Tanggal : <span className="font-bold">{props.date}</span>
                     </div>

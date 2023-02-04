@@ -118,7 +118,6 @@ export default function NotPresent(props) {
                                   >
                                     Hadir
                                   </Link>
-                                  {/* </form> */}
                                 </td>
                               </tr>
                             </tbody>
