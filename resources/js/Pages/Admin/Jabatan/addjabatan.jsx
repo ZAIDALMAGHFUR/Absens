@@ -8,43 +8,48 @@ export default function addJabatan(props) {
 
     const { errors } = usePage().props;
     const [name, setName] = useState('');
-    const handleSubmit = () => {
-        const data = {
-            name
-        }
+    // const handleSubmit = () => {
+    //     const data = {
+    //         name
+    //     }
+    //     Inertia.post('/storejabatan', data)
+    //     setName('')
 
-        Inertia.post('/storejabatan', data)
-        setName('')
-
-        if (name === '') {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Please fill in the form!',
-            })
-            return
-        }
-
-        // if (name.length < 3) {
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Oops...',
-        //         text: 'Name Position must be more than 3 characters!',
-        //     })
-        //     return
-        // }
-
-        if (errors === false) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Data Jabatan berhasil di tambahkan!',
-                showConfirmButton: true,
-            })
-            return
-        }
+    //     if (name === '') {
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Oops...',
+    //             text: 'Please fill in the form!',
+    //         })
+    //         return
+    //     }
+    // }
 
 
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        Inertia.post('/storejabatan', {
+            name: name
+        }, {
+            onSuccess: () => {
+
+                //show alert
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Data saved successfully!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
     }
+
+
+
 
     console.log(errors)
     return (
@@ -57,7 +62,7 @@ export default function addJabatan(props) {
 
                 <div className='flex justify-center'>
                     <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-                        <form className="space-y-6" action="#">
+                        <form className="space-y-6" action="#" onSubmit={handleSubmit}>
                             <h5 className="text-xl font-medium text-gray-900 dark:text-white">Add Position in website</h5>
                             <div>
                                 <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name Position</label>
