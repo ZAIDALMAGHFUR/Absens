@@ -26,11 +26,15 @@ class JabatanController extends Controller
 
     public function store(Request $request)
     {
-        $position = new Position();
-        $position->name = $request->name;
-        $position->save();
+        $this->validate($request, [
+            'name' => 'required|unique:positions',
+            ]);
+        Position::create([
+            'name' => $request->name,
+        ]);
         return redirect()->back();
     }
+
 
     public function edit(Position $position, $id)
     {

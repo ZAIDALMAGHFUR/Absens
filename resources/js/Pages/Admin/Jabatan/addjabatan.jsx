@@ -1,28 +1,52 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Head } from '@inertiajs/inertia-react';
+import { Head, usePage } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import Swal from 'sweetalert2'
 
 export default function addJabatan(props) {
 
+    const { errors } = usePage().props;
     const [name, setName] = useState('');
     const handleSubmit = () => {
         const data = {
             name
         }
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Data Jabatan berhasil di tambahkan!',
-            showConfirmButton: true,
-        })
-
         Inertia.post('/storejabatan', data)
         setName('')
+
+        if (name === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill in the form!',
+            })
+            return
+        }
+
+        // if (name.length < 3) {
+        //     Swal.fire({
+        //         icon: 'error',
+        //         title: 'Oops...',
+        //         text: 'Name Position must be more than 3 characters!',
+        //     })
+        //     return
+        // }
+
+        if (errors === false) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Data Jabatan berhasil di tambahkan!',
+                showConfirmButton: true,
+            })
+            return
+        }
+
+
     }
 
-    // console.log('props last: ',props)
+    console.log(errors)
     return (
         <AdminLayout>
             <Head title="Jabatan" />
@@ -39,6 +63,11 @@ export default function addJabatan(props) {
                                 <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name Position</label>
                                 <input type="name" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Manager" onChange={(name) => setName(name.target.value)} value={name} />
                             </div>
+                            {errors.name && (
+                                <div className="alert bg-red-600">
+                                    {errors.name}
+                                </div>
+                            )}
                             <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => handleSubmit()}>Add Position</button>
                         </form>
                     </div>

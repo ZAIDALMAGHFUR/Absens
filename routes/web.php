@@ -48,7 +48,8 @@ Route::middleware(['auth', 'OnlyAdmin', ])->group(function () {
     Route::get('/editkariawan/{id}', [KariawanController::class, 'edit'])->name('editkariawan');
     Route::put('/updatekariawan/{id}', [KariawanController::class, 'update'])->name('updatekariawan');
     Route::delete('/deletekariawan/{id}', [KariawanController::class, 'destroy'])->name('deletekariawan');
-    Route::get('users/export/', [KariawanController::class, 'export']);
+
+
 
     // Route::post('/search', [SearchController::class])->name('search');
 
