@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class RegisteredUserController extends Controller
@@ -38,32 +39,26 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' => 'required|integer',
+            'phone' => 'required|string|max:255',
         ]);
 
         try {
-            $user = $this->createUser($request);
-            Auth::login($user);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_id' => '3',
+                'position_id' => '4',
+                'phone' => $request->phone,
+            ]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            throw ValidationException::withMessages(['email' => 'Email sudah terdaftar']);
         }
+
+        event(new Registered($user));
+
+        Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
-
-private function createUser(Request $request)
-{
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role_id' => 3,
-        'position_id' => 4,
-        'phone' => $request->phone,
-    ]);
-
-    event(new Registered($user));
-
-    return $user;
-}
 }

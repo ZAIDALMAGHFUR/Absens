@@ -12,6 +12,17 @@ export default function addJabatan(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (name === '') {
+            Swal.fire({
+                title: 'Oops!',
+                text: 'Position name cannot be empty !',
+                icon: 'error',
+                showConfirmButton: true,
+                timer: 15000,
+            });
+            return;
+        }
+
         function showSuccessAlert() {
             Swal.fire({
                 title: 'Success!',
@@ -34,7 +45,7 @@ export default function addJabatan(props) {
                     showConfirmButton: true,
                     timer: 15000,
                 });
-            },
+            }
         });
     }
 

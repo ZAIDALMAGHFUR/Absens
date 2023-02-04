@@ -7,8 +7,7 @@ import Swal from 'sweetalert2';
 
 export default function addJabatan(props) {
 
-    const page = usePage();
-    const errors = page.props.errors || {};
+    const { errors } = usePage().props;
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,6 +18,30 @@ export default function addJabatan(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const fields = [
+            { name: 'Name', value: name },
+            { name: 'Email', value: email },
+            { name: 'Password', value: password },
+            { name: 'Phone', value: phone },
+            { name: 'Position', value: position_id },
+            { name: 'Role', value: role_id },
+        ];
+
+        for (const field of fields) {
+            if (field.value === '') {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: `${field.name} cannot be empty !`,
+                    icon: 'error',
+                    showConfirmButton: true,
+                    timer: 15000,
+                });
+                return;
+            }
+        }
+
+
+
         function showSuccessAlert() {
             Swal.fire({
                 title: 'Success!',
@@ -28,6 +51,7 @@ export default function addJabatan(props) {
                 timer: 15000,
             });
         }
+
 
         Inertia.post('/storekariawan', {
             name,
@@ -41,18 +65,20 @@ export default function addJabatan(props) {
             onError: (errors) => {
                 Swal.fire({
                     title: 'Error!',
-                    text: 'Data failed to save!',
+                    text: 'email  already exists !',
                     icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500,
+                    showConfirmButton: true,
+                    timer: 15000,
                 });
-            },
+            }
         });
+
     };
 
 
 
-    console.log(errors)
+
+    // console.log(errors)
     return (
         <AdminLayout>
             <Head title="Kariawan" />
@@ -76,11 +102,11 @@ export default function addJabatan(props) {
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                     <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="saipul@gmail.com" onChange={(email) => setEmail(email.target.value)} value={email} />
 
-                                    {errors.email && (
+                                    {/* {errors.email && (
                                         <div className="alert bg-red-600">
                                             {errors.email}
                                         </div>
-                                    )}
+                                    )} */}
 
                                     {/* password */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
