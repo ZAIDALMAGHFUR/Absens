@@ -44,12 +44,14 @@ class JabatanController extends Controller
         ]);
     }
 
-    public function update(Request $request, $position)
+
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required|unique:positions',
-            ]);
+        ]);
 
+        $position = Position::findOrFail($id);
         $position->update([
             'name' => $request->name,
         ]);
