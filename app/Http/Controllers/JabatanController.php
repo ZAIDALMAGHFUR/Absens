@@ -32,7 +32,7 @@ class JabatanController extends Controller
         Position::create([
             'name' => $request->name,
         ]);
-        return redirect()->back();
+        return redirect()->route('jabatan');
     }
 
 

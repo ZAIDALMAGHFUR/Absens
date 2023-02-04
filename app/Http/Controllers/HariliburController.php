@@ -35,7 +35,7 @@ class HariliburController extends Controller
         $holiday->holiday_date = $request->holiday_date;
         $holiday->save();
 
-        return redirect()->back();
+        return redirect()->route('harilibur');
     }
 
 
