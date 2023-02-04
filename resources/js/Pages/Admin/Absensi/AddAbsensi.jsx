@@ -30,7 +30,44 @@ export default function addAbsensi(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = {
+
+        const fields = [
+            { name: "title", value: title },
+            { name: "description", value: description },
+            { name: "start_time", value: start_time },
+            { name: "batas_start_time", value: batas_start_time },
+            { name: "end_time", value: end_time },
+            { name: "batas_end_time", value: batas_end_time },
+            { name: "Select Posisi", value: position_id },
+        ];
+
+        for (const field of fields) {
+            if (field.value === '') {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: `${field.name} cannot be empty !`,
+                    icon: 'error',
+                    showConfirmButton: true,
+                    timer: 15000,
+                });
+                return;
+            }
+        }
+
+
+
+        function showSuccessAlert() {
+            Swal.fire({
+                title: "Success!",
+                text: "Absensi saved successfully!",
+                icon: "success",
+                showConfirmButton: true,
+                timer: 15000,
+            });
+        }
+
+
+        Inertia.post("/storeabsensi", {
             title,
             description,
             start_time,
@@ -39,24 +76,10 @@ export default function addAbsensi(props) {
             batas_end_time,
             attendance_id,
             position_id: selectedPositionId,
-        };
-
-        console.log(data);
-        Swal.fire({
-            icon: "success",
-            title: "Absensi berhasil di tambahkan!",
-            showConfirmButton: true,
+        }, {
+            onSuccess: showSuccessAlert,
         });
 
-        Inertia.post("/storeabsensi", data);
-        setTitle("");
-        setDescription("");
-        setStart_time("");
-        setBatas_start_time("");
-        setEnd_time("");
-        setBatas_end_time("");
-        setAttendance_id("");
-        setPosition_id([]);
     };
 
 
@@ -92,7 +115,7 @@ export default function addAbsensi(props) {
                                     name="name"
                                     id="name"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="Hari Senin" required
+                                    placeholder="Hari Senin"
                                     onChange={(title) =>
                                         setTitle(title.target.value)
                                     }
@@ -111,7 +134,7 @@ export default function addAbsensi(props) {
                                     name="keterangan"
                                     id="keterangan"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-                                    placeholder="Hari Ahad" required
+                                    placeholder="Hari Ahad"
                                     onChange={(description) =>
                                         setDescription(description.target.value)
                                     }
@@ -129,7 +152,7 @@ export default function addAbsensi(props) {
                                     type="time"
                                     name="keterangan"
                                     id="keterangan"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
                                     onChange={(start_time) =>
                                         setStart_time(start_time.target.value)
                                     }
@@ -147,7 +170,7 @@ export default function addAbsensi(props) {
                                     type="time"
                                     name="keterangan"
                                     id="keterangan"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
                                     onChange={(batas_start_time) =>
                                         setBatas_start_time(
                                             batas_start_time.target.value
@@ -167,7 +190,7 @@ export default function addAbsensi(props) {
                                     type="time"
                                     name="keterangan"
                                     id="keterangan"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
                                     onChange={(end_time) =>
                                         setEnd_time(end_time.target.value)
                                     }
@@ -185,7 +208,7 @@ export default function addAbsensi(props) {
                                     type="time"
                                     name="keterangan"
                                     id="keterangan"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 " required
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 "
                                     onChange={(batas_end_time) =>
                                         setBatas_end_time(
                                             batas_end_time.target.value
@@ -205,7 +228,7 @@ export default function addAbsensi(props) {
                                 name="jabatan[]"
                                 options={options}
                                 className="basic-multi-select"
-                                classNamePrefix="select" required
+                                classNamePrefix="select"
                                 onChange={handleJabatanChange}
                                 value={position_id}
                             />

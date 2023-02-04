@@ -62,8 +62,8 @@ export default function editabsensi(props) {
                         title: "Success!",
                         text: "Data updated successfully!",
                         icon: "success",
-                        showConfirmButton: false,
-                        timer: 1500,
+                        showConfirmButton: true,
+                        timer: 15000,
                     });
                 },
             }

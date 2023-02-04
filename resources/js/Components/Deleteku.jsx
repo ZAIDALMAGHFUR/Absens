@@ -31,8 +31,8 @@ export default function Delete({ URL, id }) {
                     title: 'Success!',
                     text: 'Data deleted successfully!',
                     icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500
+                    showConfirmButton: true,
+                    timer: 15000
                 })
             } else {
                 Swal.fire({
