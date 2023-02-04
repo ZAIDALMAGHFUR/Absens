@@ -75,21 +75,31 @@ class KariawanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->phone = $request->phone;
-        $user->position_id = $request->position_id;
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->route('kariawan')->with('massage', 'Data Kariawan Berhasil Diupdate');
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required ',
+            'password' => 'required',
+            'phone' => 'required',
+            'position_id' => 'required',
+            'role_id' => 'required',
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'phone' => $request->phone,
+            'position_id' => $request->position_id,
+            'role_id' => $request->role_id,
+        ]);
+        return redirect()->route('kariawan');
     }
 
     public function destroy(User $user, $id)
     {
         $user = User::find($id);
         $user->delete();
-        return redirect()->route('kariawan')->with('massage', 'Data Kariawan Berhasil Dihapus');
+        return redirect()->route('kariawan');
     }
 }

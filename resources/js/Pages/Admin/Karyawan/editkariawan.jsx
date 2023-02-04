@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Head } from '@inertiajs/inertia-react';
+import { Head, usePage } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import Swal from 'sweetalert2'
 
 
 export default function addJabatan(props) {
+
+    const { errors } = usePage().props;
     const [name, setName] = useState(props.allkariawan.name);
     const [email, setEmail] = useState(props.allkariawan.email);
     const [password, setPassword] = useState(props.allkariawan.password);
@@ -17,6 +19,42 @@ export default function addJabatan(props) {
 
     const updateUser = async (e) => {
         e.preventDefault();
+
+        const fields = [
+            { name: 'Name', value: name },
+            { name: 'Email', value: email },
+            { name: 'Password', value: password },
+            { name: 'Phone', value: phone },
+            { name: 'Position', value: position_id },
+            { name: 'Role', value: role_id },
+        ];
+
+        for (const field of fields) {
+            if (field.value === '') {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: `${field.name} cannot be empty !`,
+                    icon: 'error',
+                    showConfirmButton: true,
+                    timer: 15000,
+                });
+                return;
+            }
+        }
+
+
+
+        function showSuccessAlert() {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Data saved successfully!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 15000,
+            });
+        }
+
+
         //sending data
         Inertia.post(`/updatekariawan/${props.allkariawan.id}`, {
 
@@ -29,18 +67,16 @@ export default function addJabatan(props) {
             role_id: role_id,
             _method: "PUT"
         }, {
-            onSuccess: () => {
-
-                //show alert
+            onSuccess: showSuccessAlert,
+            onError: (errors) => {
                 Swal.fire({
-                    title: 'Success!',
-                    text: 'Data updated successfully!',
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                    title: 'Error!',
+                    text: `${errors.password} !`,
+                    icon: 'error',
+                    showConfirmButton: true,
+                    timer: 15000,
+                });
             }
-
         });
     }
 
@@ -63,23 +99,23 @@ export default function addJabatan(props) {
                                 <div>
                                     {/* nama */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User Name</label>
-                                    <input type="name" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nama" required value={name} onChange={(e) => setName(e.target.value)} />
+                                    <input type="name" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="nama" value={name} onChange={(e) => setName(e.target.value)} />
 
                                     {/* email */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                    <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="saipul@gmail.com" required onChange={(e) => setEmail(e.target.value)} value={email} />
+                                    <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="saipul@gmail.com" onChange={(e) => setEmail(e.target.value)} value={email} />
 
                                     {/* password */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                    <input type="password" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={(e) => setPassword(e.target.value)} value={password} />
+                                    <input type="password" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" onChange={(e) => setPassword(e.target.value)} value={password} />
 
                                     {/* no telphone */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No Phone</label>
-                                    <input type="text" name="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="8021657782" required onChange={(e) => setPhone(e.target.value)} value={phone} />
+                                    <input type="text" name="text" id="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="8021657782" onChange={(e) => setPhone(e.target.value)} value={phone} />
 
                                     {/* Jabatan */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
-                                    <select name="jabatan" id="jabatan" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={(e) => setPosition_id(e.target.value)} value={position_id}>
+                                    <select name="jabatan" id="jabatan" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" onChange={(e) => setPosition_id(e.target.value)} value={position_id}>
                                         {props.positions.map((position, index) => {
                                             return (
                                                 <option key={index} value={position.id}>
@@ -89,7 +125,7 @@ export default function addJabatan(props) {
                                         })}
                                     </select>
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                    <select name="jabatan" id="jabatan" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required onChange={(e) => setRole_id(e.target.value)} value={role_id}>
+                                    <select name="jabatan" id="jabatan" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" onChange={(e) => setRole_id(e.target.value)} value={role_id}>
                                         {props.role.map((role, index) => {
                                             return (
                                                 <option key={index + 6} value={role.id}>
