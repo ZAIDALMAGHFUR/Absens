@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/Layouts/AdminLayout';
-import { Head } from '@inertiajs/inertia-react';
+import { Head, usePage } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
 
 export default function addJabatan(props) {
+
+    const { errors } = usePage().props;
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,33 +14,33 @@ export default function addJabatan(props) {
     const [position_id, setPosition_id] = useState('');
     const [role_id, setRole_id] = useState('');
 
-    const handleSubmit = () => {
-        const data = {
-            name,
-            email,
-            password,
-            phone,
-            position_id,
-            role_id
-        }
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Data Kariawan berhasil di tambahkan!',
-            showConfirmButton: true,
+        Inertia.post('/storekariawan', {
+            name: name,
+            email: email,
+            password: password,
+            phone: phone,
+            position_id: position_id,
+            role_id: role_id
+        }, {
+            onSuccess: () => {
+
+                //show alert
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Data saved successfully!',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
         })
-
-        Inertia.post('/storekariawan', data)
-        setName('')
-        setEmail('')
-        setPassword('')
-        setPhone('')
-        setPosition_id('')
-        setRole_id('')
     }
 
 
-    console.log('props last: ', props)
+    console.log(errors)
     return (
         <AdminLayout>
             <Head title="Kariawan" />
@@ -50,7 +52,7 @@ export default function addJabatan(props) {
                 <div>
                     <div className='flex justify-center'>
                         <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-                            <form className="space-y-6" action="#">
+                            <form className="space-y-6" action="#" onSubmit={handleSubmit}>
                                 <h5 className="text-xl font-medium text-gray-900 dark:text-white">Tambah karyawan in website</h5>
                                 <div>
 
@@ -61,6 +63,12 @@ export default function addJabatan(props) {
                                     {/* email */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                     <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="saipul@gmail.com" onChange={(email) => setEmail(email.target.value)} value={email} />
+
+                                    {errors.email && (
+                                        <div className="alert bg-red-600">
+                                            {errors.email}
+                                        </div>
+                                    )}
 
                                     {/* password */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>

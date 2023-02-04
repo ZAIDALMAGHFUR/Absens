@@ -80,4 +80,15 @@ class User extends Authenticatable
     {
         return $this->role_id === self::USER_ROLE_ID;
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (static::where('email', $user->email)->count() > 0) {
+                throw new \Exception('user email already exists');
+            }
+        });
+    }
 }

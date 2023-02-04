@@ -8,25 +8,6 @@ export default function addJabatan(props) {
 
     const { errors } = usePage().props;
     const [name, setName] = useState('');
-    // const handleSubmit = () => {
-    //     const data = {
-    //         name
-    //     }
-    //     Inertia.post('/storejabatan', data)
-    //     setName('')
-
-    //     if (name === '') {
-    //         Swal.fire({
-    //             icon: 'error',
-    //             title: 'Oops...',
-    //             text: 'Please fill in the form!',
-    //         })
-    //         return
-    //     }
-    // }
-
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
