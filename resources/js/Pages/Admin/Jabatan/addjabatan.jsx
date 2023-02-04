@@ -58,7 +58,7 @@ export default function addJabatan(props) {
             <Head title="Jabatan" />
             <div className='mt-20 sm:ml-[15rem] xl:ml-[15rem]'>
                 <div className='m-10  text- font-bold flex justify-between xl:text-4xl xl:m-[5rem]'>
-                    <h1>Tambahakan Posisi Jabatan</h1>
+                    <h1>Tambahkan Posisi Jabatan</h1>
                 </div>
 
                 <div className='flex justify-center'>

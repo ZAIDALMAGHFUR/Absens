@@ -50,16 +50,6 @@ export default function addJabatan(props) {
             });
         }
 
-        function showErrorAlert(error) {
-            Swal.fire({
-                title: 'Error!',
-                text: error.response.data.message,
-                icon: 'error',
-                showConfirmButton: true,
-                timer: 15000,
-            });
-        }
-
         Inertia.post('/storekariawan', {
             name,
             email,
@@ -69,7 +59,15 @@ export default function addJabatan(props) {
             role_id,
         }, {
             onSuccess: showSuccessAlert,
-            onError: showErrorAlert,
+            onError: (errors) => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Email  already exists !',
+                    icon: 'error',
+                    showConfirmButton: true,
+                    timer: 15000,
+                });
+            }
         });
     };
 
@@ -81,7 +79,7 @@ export default function addJabatan(props) {
             <Head title="Kariawan" />
             <div className='mt-[5.7rem] sm:ml-[16rem] xl:ml-[15rem]'>
                 <div className='m-10  text- font-bold flex justify-between xl:text-4xl xl:m-[5rem]'>
-                    <h1>Tambahakan karyawan</h1>
+                    <h1>Tambahkan karyawan</h1>
                 </div>
 
                 <div>

@@ -63,7 +63,7 @@ export default function addHarilibur(props) {
             <div className='mt-[5.7rem] sm:ml-[16rem] xl:ml-[15rem]'>
 
                 <div className='m-10  text- font-bold flex justify-between xl:text-4xl xl:m-[5rem]'>
-                    <h1>Tambahakan Hari Libur</h1>
+                    <h1>Tambahkan Hari Libur</h1>
                 </div>
 
                 <div className='flex justify-center'>

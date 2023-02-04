@@ -40,16 +40,25 @@ class KariawanController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->phone = $request->phone;
-        $user->position_id = $request->position_id;
-        $user->role_id = $request->role_id;
-        $user->save();
-        return redirect()->back()->with('massage', 'Data Kariawan Berhasil Ditambahkan');
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'phone' => 'required',
+            'position_id' => 'required',
+            'role_id' => 'required',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'phone' => $request->phone,
+            'position_id' => $request->position_id,
+            'role_id' => $request->role_id,
+        ]);
+
+        return redirect()->route('kariawan');
     }
 
     public function edit(User $user, $id)

@@ -86,9 +86,8 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($user) {
-            if (static::where('email', $user->email)->count() > 0) {
-                session()->flash('error', 'User email already exists');
-                return false;
+            if (static::where('name', $user->name)->count() > 0) {
+                throw new \Exception('Email already exists');
             }
         });
     }
