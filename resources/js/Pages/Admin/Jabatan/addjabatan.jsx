@@ -22,8 +22,8 @@ export default function addJabatan(props) {
                     title: 'Success!',
                     text: 'Data saved successfully!',
                     icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500
+                    showConfirmButton: true,
+                    timer: 15000
                 })
             }
         })

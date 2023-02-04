@@ -38,22 +38,32 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|integer',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => '3',
-            'position_id' => '4',
-            'phone' => $request->phone,
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
+        try {
+            $user = $this->createUser($request);
+            Auth::login($user);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+private function createUser(Request $request)
+{
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role_id' => 3,
+        'position_id' => 4,
+        'phone' => $request->phone,
+    ]);
+
+    event(new Registered($user));
+
+    return $user;
+}
 }

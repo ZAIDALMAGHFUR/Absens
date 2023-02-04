@@ -3,10 +3,12 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, usePage } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
+// import { swal } from 'vendor/realrashid/sweet-alert/resources/js/sweetalert.all';
 
 export default function addJabatan(props) {
 
-    const { errors } = usePage().props;
+    const page = usePage();
+    const errors = page.props.errors || {};
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,27 +19,37 @@ export default function addJabatan(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        Inertia.post('/storekariawan', {
-            name: name,
-            email: email,
-            password: password,
-            phone: phone,
-            position_id: position_id,
-            role_id: role_id
-        }, {
-            onSuccess: () => {
+        function showSuccessAlert() {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Data saved successfully!',
+                icon: 'success',
+                showConfirmButton: true,
+                timer: 15000,
+            });
+        }
 
-                //show alert
+        Inertia.post('/storekariawan', {
+            name,
+            email,
+            password,
+            phone,
+            position_id,
+            role_id,
+        }, {
+            onSuccess: showSuccessAlert,
+            onError: (errors) => {
                 Swal.fire({
-                    title: 'Success!',
-                    text: 'Data saved successfully!',
-                    icon: 'success',
+                    title: 'Error!',
+                    text: 'Data failed to save!',
+                    icon: 'error',
                     showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        })
-    }
+                    timer: 1500,
+                });
+            },
+        });
+    };
+
 
 
     console.log(errors)
