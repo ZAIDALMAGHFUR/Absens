@@ -40,8 +40,6 @@ export default function addJabatan(props) {
             }
         }
 
-
-
         function showSuccessAlert() {
             Swal.fire({
                 title: 'Success!',
@@ -52,6 +50,15 @@ export default function addJabatan(props) {
             });
         }
 
+        function showErrorAlert(error) {
+            Swal.fire({
+                title: 'Error!',
+                text: error.response.data.message,
+                icon: 'error',
+                showConfirmButton: true,
+                timer: 15000,
+            });
+        }
 
         Inertia.post('/storekariawan', {
             name,
@@ -62,19 +69,9 @@ export default function addJabatan(props) {
             role_id,
         }, {
             onSuccess: showSuccessAlert,
-            onError: (errors) => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'email  already exists !',
-                    icon: 'error',
-                    showConfirmButton: true,
-                    timer: 15000,
-                });
-            }
+            onError: showErrorAlert,
         });
-
     };
-
 
 
 
