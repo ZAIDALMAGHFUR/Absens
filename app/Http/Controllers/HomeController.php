@@ -20,9 +20,9 @@ class HomeController extends Controller
             ->sortByDesc('data.is_end')
             ->sortByDesc('data.is_start');
 
-            return inertia('Home/Index', [
-            "title" => "Beranda",
-            "attendances" => $attendances
+        return inertia('Home/Index', [
+        "title" => "Beranda",
+        "attendances" => $attendances
         ]);
     }
 
@@ -83,7 +83,7 @@ class HomeController extends Controller
                 $tableHistory .= '<tr>';
                 $tableHistory .= '<td>' . $no++ . '</td>';
                 $tableHistory .= '<td>' . $date . '</td>';
-                $tableHistory .= '<td colspan="3">' . ($date == now()->toDateString() ? '<div className="badge text-bg-info">Belum Hadir</div>'  :    '<div className="badge text-bg-danger">Tidak Hadir</div>') . '</td></tr>';
+                $tableHistory .= '<td colspan="3">' . ($date == now()->toDateString() ? '<div className="badge text-bg-info">Belum Hadir</div>' : '<div className="badge text-bg-danger">Tidak Hadir</div>') . '</td></tr>';
             } else {
                 $tableHistory .= '<tr>';
                 $tableHistory .= '<td>' . $no++ . '</td>';
@@ -152,8 +152,9 @@ class HomeController extends Controller
     public function sendOutPresence(Attendance $attendance)
     {
         // jika absensi sudah jam pulang (is_end) dan tidak menggunakan qrcode (kebalikan)
-        if (!$attendance->data->is_end && $attendance->data->is_using_qrcode) // sama (harus) dengan view
+        if (!$attendance->data->is_end && $attendance->data->is_using_qrcode) { // sama (harus) dengan view
             return false;
+        }
 
         $presence = Presence::query()
             ->where('user_id', auth()->user()->id)
@@ -162,8 +163,9 @@ class HomeController extends Controller
             ->where('presence_out_time', null)
             ->first();
 
-        if (!$presence) // hanya untuk sekedar keamanan (kemungkinan)
+        if (!$presence) { // hanya untuk sekedar keamanan (kemungkinan)
             return back()->with('message', ['success' => false, 'message' => "Terjadi masalah pada saat melakukan absensi."]);
+        }
 
         $presence->update(['presence_out_time' => now()->toTimeString()]);
 

@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import "boxicons";
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head } from "@inertiajs/inertia-react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler } from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler, CategoryScale, LinearScale, BarElement } from "chart.js";
 // import { Doughnut } from "react-chartjs-2";
 import { PolarArea } from "react-chartjs-2";
 // import { Radar } from 'react-chartjs-2';
-
 // import Chart from 'chart.js/auto';
+// import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
+
 
 export default function Dashboard(props) {
     // console.log(props.positions)
@@ -22,7 +24,7 @@ export default function Dashboard(props) {
         setCurrentTime(time);
     }
 
-    ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
+    ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
     setInterval(updateTime, 1000);
     ChartJS.register(ArcElement, Tooltip, Legend);
@@ -62,6 +64,89 @@ export default function Dashboard(props) {
     //         },
     //     ],
     // };
+
+
+
+    // const options = {
+    //     responsive: true,
+    //     plugins: {
+    //         legend: {
+    //             position: 'top',
+    //         },
+    //         title: {
+    //             display: true,
+    //             text: 'Chart.js Line Chart',
+    //         },
+    //     },
+    // };
+
+    // const labels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli'];
+
+    // const dataku = {
+    //     labels: ['hadir', 'izin', 'alpha'],
+    //     datasets: [
+    //         {
+    //             label: 'alpha',
+    //             data: [10, 20, 30, 40, 50, 60, 70], // data baru Anda
+    //             borderColor: 'rgb(255, 99, 132)',
+    //             backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    //         },
+    //         {
+    //             label: 'hadir',
+    //             data: [props.Presence], // data baru Anda
+    //             borderColor: 'rgb(53, 162, 235)',
+    //             backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    //         },
+    //         {
+    //             label: 'izin ',
+    //             data: [], // data baru Anda
+    //             borderColor: 'rgba(255, 206, 86, 0.5)',
+    //             backgroundColor: 'rgba(255, 206, 86, 0.5)',
+    //         },
+    //     ],
+    // };
+
+
+
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Bar Chart',
+            },
+        },
+    };
+
+    const labels = props.Attendance.map((item) => item.title);
+
+    const data9 = {
+        labels,
+        datasets: [
+            {
+                label: 'alfa',
+                data: labels.map(() => props.PresenceAlfa),
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            },
+            {
+                label: 'hadir',
+                data: labels.map(() => props.Presence),
+                backgroundColor: 'rgba(53, 162, 235, 0.5)',
+            },
+            {
+                label: 'izin',
+                data: labels.map(() => props.PresenceIzin),
+                backgroundColor: 'rgba(255, 206, 86, 0.5)',
+            },
+        ],
+    };
+
+
+    console.log(props.Attendance[0].title)
 
     return (
         <>
@@ -170,6 +255,15 @@ export default function Dashboard(props) {
                             {newFunction()}
                         </div>
                     </div>
+
+
+
+                    <div className="m-[10rem] bg-white shadow-xl rounded-xl">
+                        <div className="m-[2rem]">
+                            <Bar options={options} data={data9} />
+                        </div>
+                    </div>
+
                     {/* <div class="flex justify-center mx-auto shadow-xl w-full max-w-sm bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700">
                         <div className="flex justify-center items-center">
                             <Radar data={data3} />

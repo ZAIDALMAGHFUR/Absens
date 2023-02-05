@@ -187,10 +187,4 @@ class PresenceController extends Controller
         }
         return $notPresentData;
     }
-
-
-    // public function export()
-    // {
-    //     return Excel::download(new PresenceExport(), 'users.xlsx');
-    // }
 }

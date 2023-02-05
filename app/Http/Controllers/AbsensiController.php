@@ -30,6 +30,17 @@ class AbsensiController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'start_time' => 'required',
+            'batas_start_time' => 'required',
+            'end_time' => 'required',
+            'batas_end_time' => 'required',
+            'position_id' => 'required',
+
+        ]);
+
         $Attendance = new Attendance();
         $Attendance->title = $request->title;
         $Attendance->description = $request->description;
