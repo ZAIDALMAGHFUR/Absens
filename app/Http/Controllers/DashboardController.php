@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $user = User::all()->count();
+        $user = User::all()->count() - 1;
         $Attendancer = Attendance::withCount('presencesIzin', 'presences');
         $Attendance = $Attendancer->get();
         $positions = Position::all()->count();
