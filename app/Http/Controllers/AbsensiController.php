@@ -46,7 +46,7 @@ class AbsensiController extends Controller
             ];
         }
         $Attendance->izinposisi()->insert($array);
-        return redirect()->back();
+        return redirect()->route('absensi');
     }
 
     public function edit($id)

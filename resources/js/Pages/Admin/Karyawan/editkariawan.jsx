@@ -81,7 +81,7 @@ export default function addJabatan(props) {
     }
 
 
-    console.log('props last: ', props)
+    // console.log('props last: ', props)
     return (
         <AdminLayout>
             <Head title="Kariawan" />
