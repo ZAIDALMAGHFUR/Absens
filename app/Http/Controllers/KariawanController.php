@@ -14,7 +14,7 @@ class KariawanController extends Controller
     {
         if ($request->search) {
             $search = $request->get('search');
-            $user = new UserCollection(User::where('name', 'like', '%' . $search . '%')->paginate(5));
+            $user = new UserCollection(User::where('name', 'like', '%' . $search . '%')->orWhere('email', 'like', '%' . $search . '%')->paginate(5));
         } else {
             $user = new UserCollection(User::paginate(5));
         }
