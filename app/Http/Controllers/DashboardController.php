@@ -14,29 +14,31 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $Attendance = Attendance::all();
         $user = User::all()->count();
+        $Attendancer = Attendance::withCount('presencesIzin', 'presences');
+        $Attendance = $Attendancer->get();
         $positions = Position::all()->count();
         $Holiday = Holiday::all()->count();
 
+        $cobacoba = $Attendance->map(function ($item) {
+            $user = User::all()->count();
+            return [
+                'nama' => $item->title,
+                'data' => [
+                    'izin' => $item->presences_izin_count,
+                    'masuk' => $item->presences_count,
+                    'alfa' =>  $user - $item->presences_count - 1,
+                ]
+            ];
+        });
         $Presence = Presence::all()->count();
-        $PresenceAlfa = $user - $Presence -1;
         $PresenceIzin = Presence::where('is_permission', 1)->count();
-        // dd(Attendance::withCount('presences')->get()->toArray());
         return inertia('Admin/Dashboard/Dashboard', [
                 'user' => $user,
                 'positions' => $positions,
                 'Holiday' => $Holiday,
-                'Presence' => $Presence,
-                'PresenceIzin' => $PresenceIzin,
                 'Attendance' => $Attendance,
-                'PresenceAlfa' => $PresenceAlfa,
+                'graph' => $cobacoba,
         ]);
     }
 }
-
-
-// dd(Attendance::find(7)->presences->count());
-// dd(Attendance::all()->each(function ($item) {
-        //     $item->presences;
-// })->toArray());

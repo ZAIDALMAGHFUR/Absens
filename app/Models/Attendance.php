@@ -70,8 +70,13 @@ class Attendance extends Model
     {
         return $this->hasMany(Presence::class);
     }
+    public function presencesIzin()
+    {
+        return $this->hasMany(Presence::class)->where('is_permission', 1);
+    }
 
-    public function izinposisi(){
+    public function izinposisi()
+    {
         return $this->hasMany(AttendancesPosition::class);
     }
 }

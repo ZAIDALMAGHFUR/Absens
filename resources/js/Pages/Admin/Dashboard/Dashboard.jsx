@@ -122,31 +122,34 @@ export default function Dashboard(props) {
         },
     };
 
-    const labels = props.Attendance.map((item) => item.title);
+    const labels = props.graph.map((item) => item.nama);
+
+    const color = ['rgba(255, 99, 132, 0.5)', 'rgba(53, 162, 235, 0.5)', 'rgba(255, 206, 86, 0.5)']
+
 
     const data9 = {
         labels,
         datasets: [
             {
                 label: 'alfa',
-                data: labels.map(() => props.PresenceAlfa),
+                data: props.graph.map((item) => item.data.alfa),
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {
                 label: 'hadir',
-                data: labels.map(() => props.Presence),
+                data: props.graph.map((item) => item.data.masuk),
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             },
             {
                 label: 'izin',
-                data: labels.map(() => props.PresenceIzin),
+                data: props.graph.map((item) => item.data.izin),
                 backgroundColor: 'rgba(255, 206, 86, 0.5)',
             },
         ],
     };
 
 
-    console.log(props.Attendance[0].title)
+    // console.log(props.Attendance[0].title)
 
     return (
         <>
