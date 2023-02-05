@@ -261,8 +261,8 @@ export default function Dashboard(props) {
 
 
 
-                    <div className="m-[10rem] bg-white shadow-xl rounded-xl">
-                        <div className="m-[2rem]">
+                    <div className="bg-white shadow-xl rounded-xl m-3 xl:m-[10rem] ">
+                        <div className="xl:m-[2rem]">
                             <Bar options={options} data={data9} />
                         </div>
                     </div>
