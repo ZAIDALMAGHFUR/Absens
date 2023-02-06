@@ -3,16 +3,11 @@ import "boxicons";
 import AdminLayout from '@/Layouts/AdminLayout';
 import { Head } from "@inertiajs/inertia-react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler, CategoryScale, LinearScale, BarElement } from "chart.js";
-// import { Doughnut } from "react-chartjs-2";
 import { PolarArea } from "react-chartjs-2";
-// import { Radar } from 'react-chartjs-2';
-// import Chart from 'chart.js/auto';
-// import { Line } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 
 
 export default function Dashboard(props) {
-    // console.log(props.positions)
     const getDate = new window.Date();
 
     let time = getDate.toLocaleTimeString();
@@ -29,19 +24,6 @@ export default function Dashboard(props) {
     setInterval(updateTime, 1000);
     ChartJS.register(ArcElement, Tooltip, Legend);
 
-    // const data = {
-    //     labels: ["User", "Jabatan", "Hari Libur"],
-    //     datasets: [
-    //         {
-    //             label: "# of Votes",
-    //             data: [props.user, props.positions, props.Holiday],
-    //             backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)"],
-    //             borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"],
-    //             borderWidth: 1,
-    //         },
-    //     ],
-    // };
-
     const data1 = {
         labels: ["User", "Jabatan", "Hari Libur"],
         datasets: [
@@ -52,61 +34,6 @@ export default function Dashboard(props) {
             },
         ],
     };
-
-    // const data3 = {
-    //     labels: ["User", "Jabatan", "Hari Libur"],
-    //     datasets: [
-    //         {
-    //             data: [props.user, props.positions, props.Holiday],
-    //             backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(54, 162, 235, 0.5)", "rgba(255, 206, 86, 0.5)"],
-    //             borderColor: ["rgba(255, 99, 132, 0.5)", "rgba(54, 162, 235, 0.5)", "rgba(255, 206, 86, 0.5)"],
-    //             borderWidth: 1,
-    //         },
-    //     ],
-    // };
-
-
-
-    // const options = {
-    //     responsive: true,
-    //     plugins: {
-    //         legend: {
-    //             position: 'top',
-    //         },
-    //         title: {
-    //             display: true,
-    //             text: 'Chart.js Line Chart',
-    //         },
-    //     },
-    // };
-
-    // const labels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli'];
-
-    // const dataku = {
-    //     labels: ['hadir', 'izin', 'alpha'],
-    //     datasets: [
-    //         {
-    //             label: 'alpha',
-    //             data: [10, 20, 30, 40, 50, 60, 70], // data baru Anda
-    //             borderColor: 'rgb(255, 99, 132)',
-    //             backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    //         },
-    //         {
-    //             label: 'hadir',
-    //             data: [props.Presence], // data baru Anda
-    //             borderColor: 'rgb(53, 162, 235)',
-    //             backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    //         },
-    //         {
-    //             label: 'izin ',
-    //             data: [], // data baru Anda
-    //             borderColor: 'rgba(255, 206, 86, 0.5)',
-    //             backgroundColor: 'rgba(255, 206, 86, 0.5)',
-    //         },
-    //     ],
-    // };
-
-
 
 
     const options = {
@@ -149,7 +76,6 @@ export default function Dashboard(props) {
     };
 
 
-    // console.log(props.Attendance[0].title)
 
     return (
         <>
@@ -266,12 +192,6 @@ export default function Dashboard(props) {
                             <Bar options={options} data={data9} />
                         </div>
                     </div>
-
-                    {/* <div class="flex justify-center mx-auto shadow-xl w-full max-w-sm bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700">
-                        <div className="flex justify-center items-center">
-                            <Radar data={data3} />
-                        </div>
-                    </div> */}
                 </div>
             </AdminLayout>
         </>

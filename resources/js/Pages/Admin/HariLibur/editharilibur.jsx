@@ -6,20 +6,16 @@ import Swal from 'sweetalert2'
 
 export default function editharilibur(props) {
 
-    //state
     const [title, setTitle] = useState(props.allharilibur.title);
     const [description, setDescription] = useState(props.allharilibur.description);
     const [holiday_date, setHoliday_date] = useState(props.allharilibur.holiday_date);
 
 
-    //method "updateCategory"
     const updateHoliday = async (e) => {
         e.preventDefault();
 
-        //sending data to backend
         Inertia.post(`/updateharilibur/${props.allharilibur.id}`, {
 
-            //data
             title: title,
             description: description,
             holiday_date: holiday_date,
@@ -27,7 +23,6 @@ export default function editharilibur(props) {
         }, {
             onSuccess: () => {
 
-                //show alert
                 Swal.fire({
                     title: 'Success!',
                     text: 'Data updated successfully!',
@@ -39,7 +34,7 @@ export default function editharilibur(props) {
 
         });
     }
-    console.log(props.allharilibur.id);
+
     return (
 
         <AdminLayout>

@@ -3,7 +3,6 @@ import AdminLayout from '@/Layouts/AdminLayout';
 import { Head, usePage } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import Swal from 'sweetalert2';
-// import { swal } from 'vendor/realrashid/sweet-alert/resources/js/sweetalert.all';
 
 export default function addJabatan(props) {
 
@@ -50,6 +49,7 @@ export default function addJabatan(props) {
             });
         }
 
+
         Inertia.post('/storekariawan', {
             name,
             email,
@@ -73,7 +73,6 @@ export default function addJabatan(props) {
 
 
 
-    // console.log(errors)
     return (
         <AdminLayout>
             <Head title="Kariawan" />
@@ -96,12 +95,6 @@ export default function addJabatan(props) {
                                     {/* email */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                     <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="saipul@gmail.com" onChange={(email) => setEmail(email.target.value)} value={email} />
-
-                                    {/* {errors.email && (
-                                        <div className="alert bg-red-600">
-                                            {errors.email}
-                                        </div>
-                                    )} */}
 
                                     {/* password */}
                                     <label type="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>

@@ -49,6 +49,10 @@ class KariawanController extends Controller
             'role_id' => 'required',
         ]);
 
+        if ( $request->role_id == 1){
+            return redirect()->route('kariawan')->with('error', 'Role tidak boleh admin');
+        }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,

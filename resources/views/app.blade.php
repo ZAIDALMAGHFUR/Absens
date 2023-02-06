@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <link rel="shortcut icon" href="https://mectechinv.my.id/wp-content/uploads/2022/10/Component-6.png">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 

@@ -56,7 +56,7 @@ export default function addHarilibur(props) {
         });
     }
 
-    console.log('props last: ', props)
+
     return (
         <AdminLayout>
             <Head title="Jabatan" />

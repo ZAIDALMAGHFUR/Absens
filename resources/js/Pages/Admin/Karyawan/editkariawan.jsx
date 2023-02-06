@@ -55,10 +55,8 @@ export default function addJabatan(props) {
         }
 
 
-        //sending data
         Inertia.post(`/updatekariawan/${props.allkariawan.id}`, {
 
-            //data
             name: name,
             email: email,
             password: password,
@@ -81,7 +79,6 @@ export default function addJabatan(props) {
     }
 
 
-    // console.log('props last: ', props)
     return (
         <AdminLayout>
             <Head title="Kariawan" />
